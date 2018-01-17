@@ -72,6 +72,8 @@ def average_quantiles(data, probs=QUARTILES)
   total_weight = data.map(&:last).reduce(:+)
 
   if $inegi
+    # The INEGI splits the data by integers of the total size divided by ten.
+    # If the total size is 109, the chunks would be: 10, 10, 10, 10, 10, 10, 10, 10, 10, 19
     quantile_size = total_weight / (probs.count + 1)
     cuts = (1..probs.count).map { |e| e * quantile_size }
   else
