@@ -25,8 +25,6 @@ def print_averages(data, probs, tri=false)
   end
 end
 
-DECILES = gen_probs(10)
-TERCILES = gen_probs(3)
 TOP_TEN = gen_probs(10, from=0.9)
 
 section 'Ingresos promedio (INEGI)'

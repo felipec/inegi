@@ -3,6 +3,10 @@ def gen_probs(num, from=0, to=1)
   (1..(num - 1)).map { |e| from + e * step }
 end
 
+DECILES = gen_probs(10)
+TERCILES = gen_probs(3)
+QUARTILES = gen_probs(4)
+
 def wquantiles(data, probs)
   grouped = data.group_by(&:first).map { |a, b| [a, b.reduce(0) { |sum, e| sum + e.last }] }
   values, weights = grouped.sort_by(&:first).transpose
