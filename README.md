@@ -9,7 +9,7 @@ Para obtener la tabla relevante:
 
 Para generar el reporte:
 
-    ./reports
+    ./reporte
 
 Para correr las pruebas:
 
