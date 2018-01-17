@@ -58,3 +58,8 @@ print_averages($ingresos_pc, TERCILES)
 
 title 'Promedios del 99%/%1'
 print_averages($ingresos_pc, [0.99])
+
+section 'Coeficientes Gini'
+
+puts 'Por hogar: %.02f' % [100 * gini($ingresos)]
+puts 'Per cápita: %.02f' % [100 * gini($ingresos_pc)]

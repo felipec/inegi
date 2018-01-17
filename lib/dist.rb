@@ -23,6 +23,23 @@ def wquantiles(data, probs)
   end
 end
 
+def gini(data)
+  sorted = data.sort_by(&:first)
+  sum_values = 0
+  sum_weights = 0
+
+  # total acumulated value
+  total = sorted.each_with_index.map do |(value, weight), i|
+    sum_values += value * weight
+    sum_weights += weight
+    next_weight = i + 1 < sorted.size ? sorted[i + 1].last : 0
+    sum_values * (weight + next_weight)
+  end.reduce(&:+) / 2
+
+  # normalized gini
+  return 1 - 2 * (total / (sum_values.to_f * sum_weights.to_f))
+end
+
 def average_quantiles(data, probs)
   data = data.sort_by(&:first)
 
