@@ -8,7 +8,13 @@ def average_quantiles(data, probs)
 
   total_weight = data.map(&:last).reduce(:+)
 
-  cuts = probs.map { |p| total_weight * p }
+  if $inegi
+    quantile_size = total_weight / (probs.count + 1)
+    cuts = (1..probs.count).map { |e| e * quantile_size }
+  else
+    cuts = probs.map { |p| total_weight * p }
+  end
+
   cuts << total_weight
 
   quantiles = []

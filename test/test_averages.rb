@@ -1,6 +1,9 @@
 require 'test/unit'
 
 require_relative '../lib/dist'
+require_relative '../lib/inegi'
+
+$inegi = ARGV[0] == 'inegi'
 
 class AverageQuantilesTests < Test::Unit::TestCase
 
@@ -41,6 +44,7 @@ class AverageQuantilesTests < Test::Unit::TestCase
     data = [[20, 1], [20, 1], [50, 1]]
     probs = [0.5]
     expected = [20, 40]
+    expected = [20, 35] if $inegi
     check(data, probs, expected)
   end
 
@@ -62,7 +66,22 @@ class AverageQuantilesTests < Test::Unit::TestCase
     data = [[20, 2], [30, 3], [40, 4], [50, 1], [60, 2], [70, 3], [80, 4], [90, 1], [100, 2], [10, 2], [10, 1]]
     probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     expected = [10, 18, 30, 38, 42, 58, 70, 78, 82, 98]
+    expected = [10, 15, 25, 30, 30, 45, 55, 60, 60, 92] if $inegi
     check(data, probs, expected)
+  end
+
+  def test_inegi_1
+    expected = [6_902, 12_035, 16_058, 20_082, 24_439, 29_532, 36_094, 45_593, 62_840, 143_850]
+    probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+    actual = average_quantiles($ingresos, probs)
+    assert_equal(expected, actual.map { |e| e.round })
+  end
+
+  def test_inegi_2
+    expected = [1_674, 3_033, 3_977, 4_900, 5_959, 7_183, 8_800, 11_313, 16_012, 42_120]
+    probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+    actual = average_quantiles($ingresos_pc, probs)
+    assert_equal(expected, actual.map { |e| e.round })
   end
 
 end

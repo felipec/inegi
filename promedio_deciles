@@ -14,17 +14,10 @@ DECILES = gen_probs(10)
 
 puts 'Ingresos por hogar'
 puts '------------------'
-deciles = print_averages($ingresos, DECILES)
-
-deciles_inegi = [6_902, 12_035, 16_058, 20_082, 24_439, 29_532, 36_094, 45_593, 62_840, 143_850]
-raise 'Failed check' unless deciles.map(&:round) == deciles_inegi
+print_averages($ingresos, DECILES)
 
 puts
 
-
 puts 'Ingresos per cápita'
 puts '-------------------'
-deciles = print_averages($ingresos_pc, DECILES)
-
-deciles_inegi_pc = [1_674, 3_033, 3_977, 4_900, 5_959, 7_183, 8_800, 11_313, 16_012, 42_120]
-raise 'Failed check' unless deciles.map(&:round) == deciles_inegi_pc
+print_averages($ingresos_pc, DECILES)
