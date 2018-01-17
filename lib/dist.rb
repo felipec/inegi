@@ -3,6 +3,26 @@ def gen_probs(num, from=0, to=1)
   (1..(num - 1)).map { |e| from + e * step }
 end
 
+def wquantiles(data, probs)
+  grouped = data.group_by(&:first).map { |a, b| [a, b.reduce(0) { |sum, e| sum + e.last }] }
+  values, weights = grouped.sort_by(&:first).transpose
+
+  cum = 0
+  cum_weights = weights.map { |e| cum += e }
+
+  sum = weights.reduce(:+)
+
+  probs.map do |p|
+    x = 1 + (sum - 1) * p
+    mod = x % 1
+
+    k1 = cum_weights.find_index { |e| e >= x.floor }
+    k2 = cum_weights.find_index { |e| e >= x.ceil }
+
+    (1 - mod) * values[k1] + (mod) * values[k2]
+  end
+end
+
 def average_quantiles(data, probs)
   data = data.sort_by(&:first)
 
