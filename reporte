@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+require_relative 'lib/dist'
+require_relative 'lib/inegi'
+
+def section(text)
+  puts [nil, text.upcase, '=' * text.size]
+end
+
+def title(text)
+  puts [nil, text, '-' * text.size]
+end
+
+def print_quantiles(data, probs, tri=false)
+  quantiles = wquantiles(data, probs)
+  quantiles.each_with_index do |e, i|
+    puts '%02i%% %.00f' % [100 * probs[i], e / (tri ? 1 : 3)]
+  end
+end
+
+def print_averages(data, probs)
+  quantiles = average_quantiles(data, probs)
+  quantiles.each_with_index do |e, i|
+    puts '%02i %.0f' % [i + 1, e]
+  end
+end
+
+DECILES = gen_probs(10)
+TERCILES = gen_probs(3)
+TOP_TEN = gen_probs(10, from=0.9)
+
+section 'Ingresos promedio (INEGI)'
+
+title 'Ingresos promedio por hogar (trimestral)'
+print_averages($ingresos, DECILES)
+
+title 'Ingresos promedio per cápita (trimestral)'
+print_averages($ingresos_pc, DECILES)
+
+section 'Ingresos per cápita'
+
+title 'Ingresos per cápita'
+print_quantiles($ingresos_pc, DECILES)
+
+title 'Ingresos per cápita: terciles'
+print_quantiles($ingresos_pc, TERCILES)
+
+title 'Ingresos per cápita: top 10%'
+print_quantiles($ingresos_pc, TOP_TEN)
