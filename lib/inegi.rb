@@ -2,7 +2,7 @@ $ingresos = []
 $ingresos_pc = []
 $ingresos_trab_pc = []
 
-open('NCV_concentrado_2014_concil_2010.csv').each_with_index do |l,i|
+open('concentradohogar.csv').each_with_index do |l,i|
   next if i == 0
   cols = l.split(',')
 

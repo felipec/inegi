@@ -1,14 +1,14 @@
 # install.packages('ineq')
 
-data = read.csv("NCV_concentrado_2014_concil_2010.csv")
+data = read.csv("concentradohogar.csv")
 
 values = data$ing_cor
-weights = data$factor_hog
+weights = data$factor
 integ = data$tot_integ
 
 # Per cápita
 values = data$ing_cor / data$tot_integ
-weights = data$factor_hog * data$tot_integ
+weights = data$factor * data$tot_integ
 
 library(ineq)
 l <- Lc(values / 3, weights)

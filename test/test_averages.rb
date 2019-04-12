@@ -71,14 +71,14 @@ class AverageQuantilesTests < Test::Unit::TestCase
   end
 
   def test_inegi_1
-    expected = [6_902, 12_035, 16_058, 20_082, 24_439, 29_532, 36_094, 45_593, 62_840, 143_850]
+    expected = [8_166, 14_206, 18_918, 23_556, 28_813, 34_837, 42_431, 53_383, 72_041, 168_856]
     probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     actual = average_quantiles($ingresos, probs)
     assert_equal(expected, actual.map { |e| e.round })
   end
 
   def test_inegi_2
-    expected = [1_674, 3_033, 3_977, 4_900, 5_959, 7_183, 8_800, 11_313, 16_012, 42_120]
+    expected = [2_174, 3_778, 4_937, 6_110, 7_351, 8_834, 10_808, 13_717, 19_114, 50_107]
     probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     actual = average_quantiles($ingresos_pc, probs)
     assert_equal(expected, actual.map { |e| e.round })
