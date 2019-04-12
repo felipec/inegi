@@ -1,6 +1,6 @@
 # install.packages('ineq')
 
-data = read.csv("ncv_concentrado_2014_concil_2010.csv")
+data = read.csv("NCV_concentrado_2014_concil_2010.csv")
 
 values = data$ing_cor
 weights = data$factor_hog

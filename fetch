@@ -1,6 +1,6 @@
 #!/bin/sh
 
 curl -o /tmp/concentrado.zip \
-	'http://www.beta.inegi.org.mx/contenidos/proyectos/enchogares/regulares/enigh/nc/2014/microdatos/NCV_Concentrado_2014_concil_2010_csv.zip'
+	'https://www.inegi.org.mx/contenidos/programas/enigh/nc/2014/microdatos/NCV_Concentrado_2014_concil_2010_csv.zip'
 
 unzip /tmp/concentrado.zip
