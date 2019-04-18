@@ -70,6 +70,20 @@ class AverageQuantilesTests < Test::Unit::TestCase
     check(data, probs, expected)
   end
 
+  def test_null_1
+    data = [[10, 1], [20, 1]]
+    probs = []
+    expected = [15]
+    check(data, probs, expected)
+  end
+
+  def test_null_2
+    data = [[10, 1], [20, 1], [30, 1]]
+    probs = []
+    expected = [20]
+    check(data, probs, expected)
+  end
+
   def test_inegi_1
     expected = [8_166, 14_206, 18_918, 23_556, 28_813, 34_837, 42_431, 53_383, 72_041, 168_856]
     probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
