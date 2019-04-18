@@ -19,7 +19,7 @@ dev.off()
 
 ineq_curve <- function(x, n)
 {
-    o <- order(values)
+    o <- order(x)
     x <- x[o]
     n <- n[o]
 
