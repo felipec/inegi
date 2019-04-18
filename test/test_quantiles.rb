@@ -82,6 +82,20 @@ class WQuantilesTests < Test::Unit::TestCase
     check(data, probs, expected)
   end
 
+  def test_split_1
+    data = [[10, 1], [20, 1]]
+    probs = [0.7]
+    expected = [17]
+    check(data, probs, expected)
+  end
+
+  def test_split_2
+    data = [[10, 10], [20, 10]]
+    probs = [0.7]
+    expected = [20]
+    check(data, probs, expected)
+  end
+
   def test_inegi
     probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     expected = [11587.23, 16616.40, 21184.66, 26072.20, 31657.34, 38285.17, 47059.05, 60687.96, 87032.50]
