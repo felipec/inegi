@@ -59,14 +59,14 @@ def gini(data)
   return 1 - 2 * (total / (sum_values.to_f * sum_weights.to_f))
 end
 
-# Calculates averages per group.
+# Calculates means per group.
 #
 # The +data+ is a list of pairs of values and their corresponding weight:
 #     [10, 4], [20, 3], [30, 2]
 #
-# This would generate _five_ averages for _four_ quantiles.
+# This would generate _five_ means for _four_ quantiles.
 #
-def average_quantiles(data, probs=QUARTILES)
+def wmean_quantiles(data, probs=QUARTILES)
   data = data.sort_by(&:first)
 
   total_weight = data.map(&:last).reduce(:+)
