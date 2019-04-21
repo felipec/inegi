@@ -12,6 +12,11 @@ class AverageQuantilesTests < Test::Unit::TestCase
     assert_equal(expected, actual.map { |e| e.round(6) })
   end
 
+  def check_single(data, expected)
+    actual = wmean(data)
+    assert_equal(expected, actual.round(6))
+  end
+
   def test_1
     data = [[10, 1], [20, 1]]
     probs = [0.5]
@@ -89,6 +94,18 @@ class AverageQuantilesTests < Test::Unit::TestCase
     probs = []
     expected = [20]
     check(data, probs, expected)
+  end
+
+  def test_single_1
+    data = [[10, 1], [20, 1]]
+    expected = 15
+    check_single(data, expected)
+  end
+
+  def test_single_2
+    data = [[10, 1], [20, 1], [30, 1]]
+    expected = 20
+    check_single(data, expected)
   end
 
   def test_inegi_1

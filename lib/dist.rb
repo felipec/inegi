@@ -113,3 +113,7 @@ end
 def wmedian(data)
   wquantiles(data, [0.5])[0]
 end
+
+def wmean(data)
+  wmean_quantiles(data, [])[0]
+end
