@@ -27,6 +27,18 @@ end
 
 TOP_TEN = gen_probs(10, from=0.9)
 
+section 'General'
+
+title 'General por hogar'
+
+puts 'Media: %0.f' % [wmean($ingresos) / 3]
+puts 'Mediana: %0.f' % [wmedian($ingresos) / 3]
+
+title 'General per cápita'
+
+puts 'Media: %0.f' % [wmean($ingresos_pc) / 3]
+puts 'Mediana: %0.f' % [wmedian($ingresos_pc) / 3]
+
 section 'Ingresos promedio (INEGI)'
 
 title 'Ingresos promedio por hogar (trimestral)'
