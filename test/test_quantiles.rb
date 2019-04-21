@@ -12,6 +12,11 @@ class WQuantilesTests < Test::Unit::TestCase
     assert_equal(expected, actual.map { |e| e.round(6) })
   end
 
+  def check_single(data, expected)
+    actual = wmedian(data)
+    assert_equal(expected, actual.round(6))
+  end
+
   def test_1
     data = [[10, 1], [20, 1]]
     probs = [0.5]
@@ -94,6 +99,24 @@ class WQuantilesTests < Test::Unit::TestCase
     probs = [0.7]
     expected = [20]
     check(data, probs, expected)
+  end
+
+  def test_single_1
+    data = [[10, 1], [20, 1]]
+    expected = 15
+    check_single(data, expected)
+  end
+
+  def test_single_2
+    data = [[10, 1], [20, 1], [30, 1]]
+    expected = 20
+    check_single(data, expected)
+  end
+
+  def test_single_3
+    data = [[20, 2], [30, 3], [40, 4], [50, 1], [60, 2], [70, 3], [80, 4], [90, 1], [100, 2], [10, 2], [10, 1]]
+    expected = 50
+    check_single(data, expected)
   end
 
   def test_inegi

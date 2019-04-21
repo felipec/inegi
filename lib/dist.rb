@@ -109,3 +109,7 @@ def wmean_quantiles(data, probs=QUARTILES)
 
   quantiles
 end
+
+def wmedian(data)
+  wquantiles(data, [0.5])[0]
+end
