@@ -14,14 +14,14 @@ end
 def print_quantiles(data, probs, tri=false)
   quantiles = wquantiles(data, probs)
   quantiles.each_with_index do |e, i|
-    puts '%02i%% %.00f' % [100 * probs[i], e / (tri ? 1 : 3)]
+    puts '%02i%% %.00f' % [100 * probs[i], e / (tri ? 4 : 12)]
   end
 end
 
 def print_averages(data, probs, tri=false)
   quantiles = wmean_quantiles(data, probs)
   quantiles.each_with_index do |e, i|
-    puts '%02i %.0f' % [i + 1, e / (tri ? 1 : 3)]
+    puts '%02i %.0f' % [i + 1, e / (tri ? 4 : 12)]
   end
 end
 
@@ -31,14 +31,14 @@ section 'General'
 
 title 'General por hogar'
 
-puts 'Media: %0.f' % [wmean($ingresos) / 3]
-puts 'Mediana: %0.f' % [wmedian($ingresos) / 3]
+puts 'Media: %0.f' % [wmean($ingresos) / 12]
+puts 'Mediana: %0.f' % [wmedian($ingresos) / 12]
 puts 'Gini: %.02f' % [100 * gini($ingresos)]
 
 title 'General per cápita'
 
-puts 'Media: %0.f' % [wmean($ingresos_pc) / 3]
-puts 'Mediana: %0.f' % [wmedian($ingresos_pc) / 3]
+puts 'Media: %0.f' % [wmean($ingresos_pc) / 12]
+puts 'Mediana: %0.f' % [wmedian($ingresos_pc) / 12]
 puts 'Gini: %.02f' % [100 * gini($ingresos_pc)]
 
 section 'Ingresos promedio (INEGI)'

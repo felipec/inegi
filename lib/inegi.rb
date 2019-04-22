@@ -13,6 +13,10 @@ open('concentradohogar.csv').each_with_index do |l,i|
   ocupados = cols[20].to_i
   ingtrab = cols[25].to_i
 
+  # por año
+  ingreso = ingreso * 4
+  ingtrab = ingtrab * 4
+
   # por hogar
   $ingresos << [ingreso, factor]
 
