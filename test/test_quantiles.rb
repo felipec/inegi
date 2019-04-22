@@ -122,7 +122,7 @@ class WQuantilesTests < Test::Unit::TestCase
   def test_inegi
     probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     expected = [11587.23, 16616.40, 21184.66, 26072.20, 31657.34, 38285.17, 47059.05, 60687.96, 87032.50]
-    expected = expected.map { |e| (e * 4).round(6) }
+    expected = expected.map { |e| (e * 4 * 100 / $deflator).round(6) }
     check($ingresos, probs, expected)
   end
 
