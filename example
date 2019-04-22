@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+# This script transforms a real income sample into a simplified population
+# maintaining the same income distriution.
+
+require_relative('lib/dist')
+require_relative('lib/inegi')
+
+BASE_INCOME = 10_000
+
+def title(text)
+  puts [nil, text, '-' * text.size]
+end
+
+mean = wmean($ingresos_pc)
+median = wmedian($ingresos_pc)
+$factor = BASE_INCOME.to_f / mean
+
+puts 'Median: $%d ($%d)' % [median * $factor, median]
+
+title 'Ten means'
+
+promedios = wmean_quantiles($ingresos_pc, gen_probs(10))
+promedios.each_with_index do |e, i|
+  puts '%d: $%d ($%d)' % [i + 1, e.to_f * $factor, e.to_f]
+end
+
+title 'Different blocks'
+
+(1..4).each do |n|
+  bloques = 10 ** n
+  perc = 1.to_f / bloques
+  first, _, last = wmean_quantiles($ingresos_pc, [perc, 1 - perc])
+  puts '%d: $%d ($%d) - $%d ($%d)' % [bloques, first * $factor, first, last * $factor, last]
+end
