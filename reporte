@@ -33,11 +33,13 @@ title 'General por hogar'
 
 puts 'Media: %0.f' % [wmean($ingresos) / 3]
 puts 'Mediana: %0.f' % [wmedian($ingresos) / 3]
+puts 'Gini: %.02f' % [100 * gini($ingresos)]
 
 title 'General per cápita'
 
 puts 'Media: %0.f' % [wmean($ingresos_pc) / 3]
 puts 'Mediana: %0.f' % [wmedian($ingresos_pc) / 3]
+puts 'Gini: %.02f' % [100 * gini($ingresos_pc)]
 
 section 'Ingresos promedio (INEGI)'
 
@@ -79,8 +81,3 @@ print_quantiles($ingresos_trab_pc, TERCILES)
 
 title 'Ingresos por trabajo per cápita: top 10%'
 print_quantiles($ingresos_trab_pc, TOP_TEN)
-
-section 'Coeficientes Gini'
-
-puts 'Por hogar: %.02f' % [100 * gini($ingresos)]
-puts 'Per cápita: %.02f' % [100 * gini($ingresos_pc)]
