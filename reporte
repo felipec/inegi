@@ -41,6 +41,10 @@ puts 'Media: %0.f' % [wmean($ingresos_pc) / 12]
 puts 'Mediana: %0.f' % [wmedian($ingresos_pc) / 12]
 puts 'Gini: %.02f' % [100 * gini($ingresos_pc)]
 
+title 'Clases'
+
+puts 'Media: %0.f < x < %0.f' % [(wmedian($ingresos_pc) / 12) * 0.75, (wmedian($ingresos_pc) / 12) * 2]
+
 section 'Ingresos promedio (INEGI)'
 
 title 'Ingresos promedio por hogar (trimestral)'
