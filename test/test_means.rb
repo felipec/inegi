@@ -109,14 +109,14 @@ class AverageQuantilesTests < Test::Unit::TestCase
   end
 
   def test_inegi_1
-    expected = [8_166, 14_206, 18_918, 23_556, 28_813, 34_837, 42_431, 53_383, 72_041, 168_856]
+    expected = [9_113, 16_100, 21_428, 26_696, 32_318, 38_957, 47_264, 58_885, 78_591, 166_750]
     probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     actual = wmean_quantiles($ingresos, probs)
     assert_equal(expected, actual.map { |e| (e * $deflator / 100 / 4).round })
   end
 
   def test_inegi_2
-    expected = [2_174, 3_778, 4_937, 6_110, 7_351, 8_834, 10_808, 13_717, 19_114, 50_107]
+    expected = [2_531, 4_409, 5_779, 7_076, 8_475, 10_148, 12_307, 15_484, 21_417, 50_168]
     probs = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     actual = wmean_quantiles($ingresos_pc, probs)
     assert_equal(expected, actual.map { |e| (e * $deflator / 100 / 4).round })
