@@ -33,13 +33,13 @@ title 'General por hogar'
 
 puts 'Media: %0.f' % [wmean($ingresos) / 12]
 puts 'Mediana: %0.f' % [wmedian($ingresos) / 12]
-puts 'Gini: %.02f' % [100 * gini($ingresos)]
+puts 'Gini: %.02f%%' % [100 * gini($ingresos)]
 
 title 'General per cápita'
 
 puts 'Media: %0.f' % [wmean($ingresos_pc) / 12]
 puts 'Mediana: %0.f' % [wmedian($ingresos_pc) / 12]
-puts 'Gini: %.02f' % [100 * gini($ingresos_pc)]
+puts 'Gini: %.02f%%' % [100 * gini($ingresos_pc)]
 
 title 'Clases'
 
