@@ -5,7 +5,7 @@
 #
 def gen_probs(num, from=0, to=1)
   step = (to - from) / num.to_f
-  (1..(num - 1)).map { |e| from + e * step }
+  ((from + step)...to).step(step).to_a
 end
 
 DECILES = gen_probs(10)
@@ -21,17 +21,15 @@ def wquantiles(data, probs=QUARTILES)
   grouped = data.group_by(&:first).map { |a, b| [a, b.reduce(0) { |sum, e| sum + e.last }] }
   values, weights = grouped.sort_by(&:first).transpose
 
-  cum = 0
-  cum_weights = weights.map { |e| cum += e }
+  sum = 0
+  cum_weights = weights.map { |e| sum += e }
 
-  sum = weights.reduce(:+)
+  probs.map do |prob|
+    h = 1 + (sum - 1) * prob
+    mod = h % 1
 
-  probs.map do |p|
-    x = 1 + (sum - 1) * p
-    mod = x % 1
-
-    k1 = cum_weights.find_index { |e| e >= x.floor }
-    k2 = cum_weights.find_index { |e| e >= x.ceil }
+    k1 = cum_weights.find_index { |e| e >= h.floor }
+    k2 = cum_weights.find_index { |e| e >= h.ceil }
 
     (1 - mod) * values[k1] + (mod) * values[k2]
   end
@@ -51,7 +49,7 @@ def gini(data)
   total = sorted.each_with_index.map do |(value, weight), i|
     sum_values += value * weight
     sum_weights += weight
-    next_weight = i + 1 < sorted.size ? sorted[i + 1].last : 0
+    next_weight = (i + 1 < sorted.size) ? sorted[i + 1].last : 0
     sum_values * (weight + next_weight)
   end.reduce(&:+) / 2
 
