@@ -2,8 +2,8 @@ $ingresos = []
 $ingresos_pc = []
 $ingresos_trab_pc = []
 
-# CPI: Ago-Nov 2018 -> Abr 2020
-$deflator = (101.288 / 105.755) * 100
+# CPI: Sep-Dic 2018 -> Sep 2020
+$deflator = (101.9200 / 108.1140) * 100
 
 open('concentradohogar.csv').each_with_index do |l,i|
   next if i == 0
