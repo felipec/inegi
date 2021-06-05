@@ -1,3 +1,5 @@
+require_relative 'csv'
+
 $ingresos = []
 $ingresos_pc = []
 $ingresos_trab_pc = []
@@ -5,16 +7,9 @@ $ingresos_trab_pc = []
 # CPI: Sep-Dic 2018 -> Sep 2020
 $deflator = (101.9200 / 108.1140) * 100
 
-open('concentradohogar.csv').each_with_index do |l,i|
-  next if i == 0
-  cols = l.split(',')
-
-  factor = cols[7].to_i
-  integ = cols[12].to_i
-  ingreso = cols[22].to_f
-
-  ocupados = cols[19].to_i
-  ingtrab = cols[23].to_i
+csv('concentradohogar.csv', %w[ing_cor factor tot_integ ocupados ingtrab]) do |e|
+  _, factor, integ, ocupados, ingtrab = e.map(&:to_i)
+  ingreso = e.first.to_f
 
   # por año ajustado
   ingreso = ingreso * 4 * 100 / $deflator
