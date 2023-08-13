@@ -4,8 +4,8 @@ $ingresos = []
 $ingresos_pc = []
 $ingresos_trab_pc = []
 
-# CPI: Sep-Dic 2018 -> Sep 2020
-$deflator = (101.9200 / 108.1140) * 100
+# CPI: Aug-Nov 2020 -> Jul 2023
+$deflator = (108.403 / 128.832) * 100
 
 csv('concentradohogar.csv', %w[ing_cor factor tot_integ ocupados ingtrab]) do |e|
   _, factor, integ, ocupados, ingtrab = e.map(&:to_i)
